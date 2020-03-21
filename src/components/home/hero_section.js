@@ -1,73 +1,14 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
-import { ParallaxProvider, Parallax } from "react-scroll-parallax"
+import { ParallaxProvider } from "react-scroll-parallax"
 
 import CallToAction from "../call_to_action"
-import ImageLoader from "../image_loader"
+import ParallaxImage from "./hero_section/parallax_image"
 import Text from "../text"
 import Title from "./hero_section/title"
-import useWindowSize from "../../utils/use_window_size"
 
 import styles from "./hero_section.module.css"
-
-const absoluteStyle = {
-  position: "absolute",
-  top: 0,
-  right: 0,
-  bottom: 0,
-  left: 0,
-}
-
-const ParallaxImage = ({
-  baseDelay,
-  alt,
-  mobileImage,
-  desktopImage,
-  objectPosition,
-  mobileTopMargin,
-  mobileBottomMargin,
-  desktopTopMargin,
-  desktoBottomMargin,
-}) => {
-  const size = useWindowSize()
-
-  return (
-    <div
-      style={{
-        overflow: "hidden",
-        position: "unset !important",
-      }}
-    >
-      <Parallax
-        y={[-15, 15]}
-        styleInner={absoluteStyle}
-        styleOuter={{
-          ...absoluteStyle,
-          marginTop: size.width > 400 ? desktopTopMargin : mobileTopMargin,
-          marginBottom:
-            size.width > 400 ? desktoBottomMargin : mobileBottomMargin,
-        }}
-      >
-        <ImageLoader
-          delay={baseDelay}
-          imgStyle={{ objectPosition }}
-          fluid={[
-            {
-              ...mobileImage,
-              media: "(max-width: 399px)",
-            },
-            {
-              ...desktopImage,
-              media: "(min-width: 400px)",
-            },
-          ]}
-          alt={alt}
-        />
-      </Parallax>
-    </div>
-  )
-}
 
 const HeroSection = ({ data, planetMorph, hidePlanet }) => {
   const baseDelay = 0.3
