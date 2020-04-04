@@ -3,9 +3,12 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 
 import Body from "../../components/blog/post/body"
+import BodyWrapper from "../../components/blog/post/body_wrapper"
 import Header from "../../components/blog/post/header"
 import Layout from "../../components/layout"
 import SEO from "../../components/seo"
+import ShareLinks from "../../components/blog/post/share_links"
+import Wrapper from "../../components/blog/post/wrapper"
 
 import "../../common/base.scss"
 import styles from "./post.module.scss"
@@ -23,11 +26,12 @@ export const query = graphql`
         cover
         title
       }
+      html
     }
   }
 `
 
-const BlogPostTemplate = ({ author, date, html, cover, title }) => (
+const BlogPostTemplate = ({ author, date, html, cover, path, title }) => (
   <Layout>
     <SEO title={title} />
     <div className={styles.root}>
@@ -35,8 +39,13 @@ const BlogPostTemplate = ({ author, date, html, cover, title }) => (
         <header className={styles.header}>
           <Header {...{ author, date, cover, title }} />
         </header>
-        <section className={styles.body}>
-          <Body html={html} />
+        <section>
+          <Wrapper className={styles.outerWrapper}>
+            <BodyWrapper className={styles.innerWrapper}>
+              <Body html={html} />
+            </BodyWrapper>
+            <ShareLinks className={styles.shareLinks} url={path} />
+          </Wrapper>
         </section>
       </article>
     </div>
@@ -54,11 +63,11 @@ BlogPostTemplate.propTypes = {
 export default ({ data }) => {
   const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
-  const { author, date, cover, title } = frontmatter
+  const { author, date, cover, path, title } = frontmatter
 
   return (
     <BlogPostTemplate
-      {...{ author, date: new Date(date), html, cover, title }}
+      {...{ author, cover, date: new Date(date), html, path, title }}
     />
   )
 }
