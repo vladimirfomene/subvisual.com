@@ -9,21 +9,29 @@ import {
 import AnimationStyle from "./planet/animation_style"
 import RadialGradient from "./planet/radial_gradient"
 import { withMorphStyle } from "../utils/morph_utils"
+import useDetectAnimations from "../utils/use_detect_animations"
 
 import styles from "./planet.module.css"
 
+const renderAnimationStyle = ({ animationsEnabled, animation, hovering }) => {
+  if (!animationsEnabled) return null
+
+  return <AnimationStyle {...animation} hovering={hovering} />
+}
+
 const Planet = ({ color, hide, hoverAnimation, hovering, morph }) => {
+  const animationsEnabled = useDetectAnimations()
+
   if (hide) return null
 
   const animation = generateAnimation(hoverAnimation)
-  const animationStyle = buildAnimationStyles(animation)
-  const [rootStyle, newMorph] = withMorphStyle(morph, animationStyle)
+  const animatedRootStyle = buildAnimationStyles(animation)
+  const [rootStyle, newMorph] = withMorphStyle(morph, animatedRootStyle)
   const radialID = _uniqueId("planet-radial-")
 
   return (
     <>
-      <AnimationStyle {...animation} hovering={hovering} />
-
+      {renderAnimationStyle({ animationsEnabled, animation, hovering })}
       <div className={styles.root} style={rootStyle} {...newMorph}>
         <svg
           viewBox="0 0 104 104"

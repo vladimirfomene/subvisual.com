@@ -10,7 +10,7 @@ export const generateAnimation = ({ delay, duration, startYAt, endYAt }) => ({
   endYAt: endYAt || _random(-20, 20),
 })
 
-export const buildAnimationStyles = ({ delay, duration, name }) => ({
+export const buildAnimationStyles = ({ delay, duration, name } = {}) => ({
   animationName: name,
   animationDelay: `${delay}s`,
   animationDuration: `${duration}s`,
