@@ -3,9 +3,12 @@ import PropTypes from "prop-types"
 import { disablePageScroll, enablePageScroll } from "scroll-lock"
 import _uniqueId from "lodash/uniqueId"
 
+import useDetectAnimations from "../utils/use_detect_animations"
+
 import styles from "./splash_screen.module.css"
 
 const SplashScreen = ({ lockScrollFor, onHide, morph, showFor }) => {
+  const animationsEnabled = useDetectAnimations()
   const [showing, setShowing] = useState(true)
   const radialId = _uniqueId("splash-screen-radial-")
   const rootId = _uniqueId("splash-screen-")
@@ -21,7 +24,7 @@ const SplashScreen = ({ lockScrollFor, onHide, morph, showFor }) => {
     setTimeout(() => enablePageScroll(document.documentElement), lockScrollFor)
   }, [])
 
-  if (!showing) return null
+  if (!animationsEnabled || !showing) return null
 
   return (
     <>
