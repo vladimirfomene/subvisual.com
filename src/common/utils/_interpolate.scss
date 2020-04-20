@@ -1,0 +1,28 @@
+@use "sass:math";
+
+@mixin interpolate(
+  $property,
+  $from,
+  $to,
+  $start,
+  $end,
+  $before: $start,
+  $after: $end
+) {
+  #{$property}: $before;
+
+  @media (min-width: #{$from}) {
+    $base: min($start, $end);
+    $multiplier: abs($end - $start) / abs($to - $from);
+
+    @if $base > 0 {
+      #{$property}: calc(#{$base} + (#{$to} - 100vw) * #{$multiplier});
+    } @else {
+      #{$property}: calc((#{$to} - 100vw) * #{$multiplier});
+    }
+  }
+
+  @media (min-width: #{$to}) {
+    #{$property}: $after;
+  }
+}
