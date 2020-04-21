@@ -31,10 +31,10 @@ export const query = graphql`
 const BlogPostTemplate = ({
   author,
   date,
+  description,
   html,
   retinaCover,
   title,
-  description,
 }) => (
   <Layout>
     <SEO {...{ description, title }} />
