@@ -66,9 +66,9 @@ export default ({ data }) => {
   const {
     author,
     date,
+    description,
     retina_cover: retinaCover,
     title,
-    description,
   } = frontmatter
 
   return (
