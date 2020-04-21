@@ -22,14 +22,22 @@ export const query = graphql`
         date
         retina_cover
         title
+        description
       }
     }
   }
 `
 
-const BlogPostTemplate = ({ author, date, html, retinaCover, title }) => (
+const BlogPostTemplate = ({
+  author,
+  date,
+  html,
+  retinaCover,
+  title,
+  description,
+}) => (
   <Layout>
-    <SEO title={title} />
+    <SEO {...{ description, title }} />
     <div className={styles.root}>
       <article className={styles.article}>
         <header className={styles.header}>
@@ -49,16 +57,30 @@ BlogPostTemplate.propTypes = {
   html: PropTypes.string.isRequired,
   retinaCover: PropTypes.string,
   title: PropTypes.string.isRequired,
+  description: PropTypes.string,
 }
 
 export default ({ data }) => {
   const { markdownRemark } = data
   const { frontmatter, html } = markdownRemark
-  const { author, date, retina_cover: retinaCover, title } = frontmatter
+  const {
+    author,
+    date,
+    retina_cover: retinaCover,
+    title,
+    description,
+  } = frontmatter
 
   return (
     <BlogPostTemplate
-      {...{ author, date: new Date(date), html, retinaCover, title }}
+      {...{
+        author,
+        date: new Date(date),
+        html,
+        retinaCover,
+        title,
+        description,
+      }}
     />
   )
 }

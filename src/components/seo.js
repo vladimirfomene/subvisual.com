@@ -3,6 +3,8 @@ import PropTypes from "prop-types"
 import Helmet from "react-helmet"
 import { StaticQuery, graphql } from "gatsby"
 
+import { validateDescription } from "./seo/validations"
+
 const detailsQuery = graphql`
   query DefaultSEOQuery {
     site {
@@ -75,6 +77,7 @@ SEO.propTypes = {
   lang: PropTypes.string,
   keywords: PropTypes.arrayOf(PropTypes.string),
   title: PropTypes.string,
+  description: (props, propName) => validateDescription(props[propName]),
 }
 
 export default SEO
