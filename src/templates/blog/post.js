@@ -76,10 +76,10 @@ export default ({ data }) => {
       {...{
         author,
         date: new Date(date),
+        description,
         html,
         retinaCover,
         title,
-        description,
       }}
     />
   )
