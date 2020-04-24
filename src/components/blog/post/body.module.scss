@@ -40,6 +40,10 @@
 
       font-size: 66px;
       line-height: 58px;
+
+      @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+        margin-top: 2px;
+      }
     }
 
     @-moz-document url-prefix() {
