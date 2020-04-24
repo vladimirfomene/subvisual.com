@@ -27,8 +27,8 @@ In these programs, you'll work in a creative environment with a mentor.
 A mentor is a member of our team. They will help you define goals, give your
 guidance, and answer all your questions.
 
-And we have big news! This year our friends at Aurora, Finiam, and Onda will
-join our team of mentors. \o/
+And we have big news! This year our friends at [Aurora], [Finiam], and [Onda]
+will join our team of mentors. \o/
 
 ## More about the programs
 
@@ -122,4 +122,7 @@ at one of our partners.
 
 Hope to hear from you!
 
+[Aurora]: https://auroradigital.co/
+[Finiam]: https://www.finiam.com/
+[Onda]: https://ondastudio.co/
 [aloha@subvisual.academy]: mailto:aloha@subvisual.academy
